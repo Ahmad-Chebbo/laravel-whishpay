@@ -6,14 +6,14 @@ A clean, production-ready Laravel wrapper for the **Whish Payment Gateway API** 
 
 ## ✨ Features
 
-✅ Simple Laravel integration
-✅ Facade + Dependency Injection support
-✅ Automatic request headers
-✅ Config publishing
-✅ Health diagnostics command
-✅ Cron-ready payment status checker
-✅ Enum support
-✅ Extensible architecture
+✅ Simple Laravel integration  
+✅ Facade + Dependency Injection support  
+✅ Automatic request headers  
+✅ Config publishing  
+✅ Health diagnostics command  
+✅ Cron-ready payment status checker  
+✅ Enum support  
+✅ Extensible architecture  
 ✅ DTO-based requests  
 ✅ Typed responses  
 ✅ Pipeline validation  
