@@ -1,12 +1,14 @@
 <?php
 
+use AhmadChebbo\WhishPay\Pipelines\ValidatePaymentPayload;
+
 /**
  * Whish Pay Configuration
  *
  * This file is for storing the configuration values for the Whish Pay integration.
- * 
+ *
  * @see https://docs.whish.money/
- * 
+ *
  * Environment Variables you may use:
  * - WHISH_PRODUCTION_URL
  * - WHISH_SANDBOX_URL
@@ -26,8 +28,8 @@ return [
     |--------------------------------------------------------------------------
     | The API endpoints for both the production and sandbox environments.
     */
-    'production_url' => env('WHISH_PRODUCTION_URL', 'https://api.whish.money/itel-service/api'),
-    'sandbox_url'    => env('WHISH_SANDBOX_URL', 'https://api.sandbox.whish.money/itel-service/api'),
+    'production_url' => env('WHISH_PRODUCTION_URL', 'https://whish.money/itel-service/api'),
+    'sandbox_url' => env('WHISH_SANDBOX_URL', 'https://lb.sandbox.whish.money/itel-service/api'),
 
     /*
     |--------------------------------------------------------------------------
@@ -35,7 +37,7 @@ return [
     |--------------------------------------------------------------------------
     | Determines which API environment to use: 'production' or 'sandbox'.
     */
-    'mode'           => env('WHISH_MODE', 'sandbox'), // Valid values: sandbox, production
+    'mode' => env('WHISH_MODE', 'sandbox'), // Valid values: sandbox, production
 
     /*
     |--------------------------------------------------------------------------
@@ -43,8 +45,8 @@ return [
     |--------------------------------------------------------------------------
     | Credentials and identification for requests.
     */
-    'channel'        => env('WHISH_CHANNEL'), // Whish issued channel ID
-    'secret'         => env('WHISH_SECRET'), // Whish issued secret key
+    'channel' => env('WHISH_CHANNEL'), // Whish issued channel ID
+    'secret' => env('WHISH_SECRET'), // Whish issued secret key
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +54,7 @@ return [
     |--------------------------------------------------------------------------
     | The base URL of your website (used for redirect or webhook integration).
     */
-    'website_url'    => env('WHISH_WEBSITE_URL'),
+    'website_url' => env('WHISH_WEBSITE_URL'),
 
     /*
     |--------------------------------------------------------------------------
@@ -60,7 +62,7 @@ return [
     |--------------------------------------------------------------------------
     | HTTP User-Agent header to send with requests.
     */
-    'user_agent'     => env('WHISH_USER_AGENT', 'Whish/1.0 (https://whish.money; support@whish.money)'),
+    'user_agent' => env('WHISH_USER_AGENT', 'Whish/1.0 (https://whish.money; support@whish.money)'),
 
     /*
     |--------------------------------------------------------------------------
@@ -68,7 +70,7 @@ return [
     |--------------------------------------------------------------------------
     | The maximum time (seconds) to wait for a Whish server response.
     */
-    'timeout'        => 30,
+    'timeout' => 30,
 
     /*
     |--------------------------------------------------------------------------
@@ -76,7 +78,7 @@ return [
     |--------------------------------------------------------------------------
     | Enable to simulate API responses for testing (without hitting Whish APIs).
     */
-    'fake'           => env('WHISH_FAKE', false),
+    'fake' => env('WHISH_FAKE', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,7 +86,7 @@ return [
     |--------------------------------------------------------------------------
     | The list of ISO currency codes accepted for payments.
     */
-    'allowed_currencies' => ['USD', 'LBP'],
+    'allowed_currencies' => ['USD', 'LBP', 'AED'],
 
     /*
     |--------------------------------------------------------------------------
@@ -113,8 +115,7 @@ return [
     |--------------------------------------------------------------------------
     | Optionally specify a custom model for storing pending payments.
     */
-    // 'pending_model'  => App\Models\Payment::class,
-
+    // 'payment_model'  => App\Models\Payment::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -122,12 +123,12 @@ return [
     |--------------------------------------------------------------------------
     | Define the list of pipeline classes that process payments before submission.
     | You can customize validation, logging, fraud detection, limits, etc.
-    | The order matters: each pipeline gets the payment DTO, runs its logic, 
+    | The order matters: each pipeline gets the payment DTO, runs its logic,
     | then passes control to the next. Comment/uncomment as needed.
     */
     'enable_pipeline' => false,
     'pipelines' => [
-        \AhmadChebbo\WhishPay\Pipelines\ValidatePaymentPayload::class,
+        ValidatePaymentPayload::class,
         // \AhmadChebbo\WhishPay\Pipelines\FraudDetectionPipeline::class,
         // \AhmadChebbo\WhishPay\Pipelines\CurrencyValidationPipeline::class,
         // \AhmadChebbo\WhishPay\Pipelines\AmountLimitPipeline::class,

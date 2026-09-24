@@ -2,9 +2,9 @@
 
 namespace AhmadChebbo\WhishPay\Commands;
 
+use AhmadChebbo\WhishPay\Contracts\WhishPayContract;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
-use AhmadChebbo\WhishPay\Contracts\WhishPayContract;
 use Throwable;
 
 class WhishHealthCommand extends Command
@@ -24,6 +24,7 @@ class WhishHealthCommand extends Command
         foreach (['channel', 'secret', 'website_url'] as $key) {
             if (empty($config[$key])) {
                 $this->error("Missing config: whish-pay.$key");
+
                 return self::FAILURE;
             }
         }
@@ -62,13 +63,14 @@ class WhishHealthCommand extends Command
                 $this->line('ℹ️ Production URL (base_url) not configured.');
             }
 
-            if (!$allReachable) {
+            if (! $allReachable) {
                 return self::FAILURE;
             }
 
         } catch (Throwable $e) {
 
             $this->error('Cannot reach Whish API.');
+
             return self::FAILURE;
         }
 
@@ -78,10 +80,11 @@ class WhishHealthCommand extends Command
             $balance = $whish->getBalance();
 
             $this->info('✔ Credentials valid');
-            $this->line('Balance: ' . $balance);
+            $this->line('Balance: '.$balance);
         } catch (Throwable $e) {
 
-            $this->error('Credentials failed: ' . $e->getMessage());
+            $this->error('Credentials failed: '.$e->getMessage());
+
             return self::FAILURE;
         }
 

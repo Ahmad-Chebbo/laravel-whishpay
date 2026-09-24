@@ -2,7 +2,6 @@
 
 namespace AhmadChebbo\WhishPay\DTOs;
 
-
 class StatusResponseDTO
 {
     public function __construct(

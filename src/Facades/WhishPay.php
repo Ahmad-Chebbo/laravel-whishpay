@@ -2,6 +2,7 @@
 
 namespace AhmadChebbo\WhishPay\Facades;
 
+use AhmadChebbo\WhishPay\Contracts\WhishPayContract;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -13,6 +14,6 @@ class WhishPay extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \AhmadChebbo\WhishPay\Contracts\WhishPayContract::class;
+        return WhishPayContract::class;
     }
 }

@@ -2,8 +2,8 @@
 
 namespace AhmadChebbo\WhishPay\Commands;
 
-use Illuminate\Console\Command;
 use AhmadChebbo\WhishPay\Contracts\WhishPayContract;
+use Illuminate\Console\Command;
 
 class WhishStatusCheckerCommand extends Command
 {
@@ -14,12 +14,13 @@ class WhishStatusCheckerCommand extends Command
     public function handle(WhishPayContract $whish)
     {
         // Developer defines how to fetch pending payments.
-        if (!class_exists(config('whish-pay.pending_model'))) {
-            $this->error('Define pending_model in config.');
+        if (! class_exists(config('whish-pay.payment_model'))) {
+            $this->error('Define payment_model in config.');
+
             return;
         }
 
-        $model = config('whish-pay.pending_model');
+        $model = config('whish-pay.payment_model');
 
         $pending = $model::where('status', 'pending')->limit(50)->get();
 

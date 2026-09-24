@@ -2,8 +2,8 @@
 
 namespace AhmadChebbo\WhishPay\Commands;
 
-use Illuminate\Console\Command;
 use AhmadChebbo\WhishPay\Contracts\WhishPayContract;
+use Illuminate\Console\Command;
 use Throwable;
 
 class WhishTestCommand extends Command
@@ -21,7 +21,7 @@ class WhishTestCommand extends Command
             $balance = $whish->getBalance();
 
             $this->info('✅ Connection successful!');
-            $this->line('Balance: ' . $balance);
+            $this->line('Balance: '.$balance);
 
             return self::SUCCESS;
         } catch (Throwable $e) {

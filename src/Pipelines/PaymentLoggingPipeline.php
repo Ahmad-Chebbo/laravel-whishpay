@@ -2,9 +2,9 @@
 
 namespace AhmadChebbo\WhishPay\Pipelines;
 
+use AhmadChebbo\WhishPay\DTOs\PaymentDTO;
 use Closure;
 use Illuminate\Support\Facades\Log;
-use AhmadChebbo\WhishPay\DTOs\PaymentDTO;
 
 class PaymentLoggingPipeline
 {

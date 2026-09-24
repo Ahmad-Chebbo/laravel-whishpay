@@ -32,8 +32,7 @@ class WhishPayService implements WhishPayContract
      */
     public function createPayment(PaymentDTO $dto): PaymentResponseDTO
     {
-        if (config('whish-pay.enable_pipeline')) 
-        {
+        if (config('whish-pay.enable_pipeline')) {
             // Pass DTO through validation pipeline
             $dto = $this->pipeline
                 ->send($dto)
@@ -46,7 +45,7 @@ class WhishPayService implements WhishPayContract
             $dto->toArray()
         );
 
-        if (!isset($data['collectUrl'])) {
+        if (! isset($data['collectUrl'])) {
             throw new WhishException('Invalid payment response from Whish.');
         }
 
@@ -68,7 +67,7 @@ class WhishPayService implements WhishPayContract
             ]
         );
 
-        if (!isset($data['collectStatus'])) {
+        if (! isset($data['collectStatus'])) {
             throw new WhishException('Invalid status response.');
         }
 

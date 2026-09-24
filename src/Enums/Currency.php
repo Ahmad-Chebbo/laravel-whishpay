@@ -6,4 +6,5 @@ enum Currency: string
 {
     case USD = 'USD';
     case LBP = 'LBP';
+    case AED = 'AED';
 }

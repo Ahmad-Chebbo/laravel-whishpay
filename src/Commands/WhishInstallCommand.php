@@ -22,8 +22,8 @@ class WhishInstallCommand extends Command
         $mode = $this->choice('Choose Whish Pay mode', ['sandbox', 'production'], 0);
         $channel = $this->ask('Enter your Whish Pay channel');
         $secret = $this->ask('Enter your Whish Pay secret');
-        $productionUrl = $this->ask('Enter your Whish Pay production URL (as provided by Whish)', 'https://api.whish.money/itel-service/api');
-        $sandboxUrl = $this->ask('Enter your Whish Pay sandbox URL (as provided by Whish)', 'https://api.sandbox.whish.money/itel-service/api');
+        $productionUrl = $this->ask('Enter your Whish Pay production URL (as provided by Whish)', 'https://whish.money/itel-service/api');
+        $sandboxUrl = $this->ask('Enter your Whish Pay sandbox URL (as provided by Whish)', 'https://lb.sandbox.whish.money/itel-service/api');
         $websiteUrl = $this->ask('Enter your website URL (for webhooks or reference, e.g., https://your-site.com)');
         $timeout = $this->ask('Set an API timeout in seconds', 30);
 
@@ -43,20 +43,21 @@ class WhishInstallCommand extends Command
         $envAdded = false;
 
         if (is_writable($envPath)) {
-            file_put_contents($envPath, PHP_EOL . implode(PHP_EOL, $envLines) . PHP_EOL, FILE_APPEND);
+            file_put_contents($envPath, PHP_EOL.implode(PHP_EOL, $envLines).PHP_EOL, FILE_APPEND);
             $this->info('.env updated with Whish Pay configuration!');
             $envAdded = true;
         } else {
             $this->warn("Could not write to .env file. Please add the following lines manually:\n");
-            foreach($envLines as $line) {
+            foreach ($envLines as $line) {
                 $this->line($line);
             }
         }
 
         // Summary
         $this->info('Whish Pay environment configuration summary:');
-        $this->table(['Key', 'Value'], collect($envLines)->map(function($l) {
+        $this->table(['Key', 'Value'], collect($envLines)->map(function ($l) {
             [$k, $v] = explode('=', $l, 2);
+
             return [$k, $v];
         }));
 

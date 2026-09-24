@@ -17,6 +17,7 @@ class WhishWebhookCommand extends Command
 
         if (File::exists($path)) {
             $this->error('Webhook controller already exists.');
+
             return;
         }
 

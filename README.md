@@ -1,6 +1,20 @@
 # Laravel Whish Pay
 
+[![Laravel](https://img.shields.io/badge/Laravel-10+-FF2D20.svg)](https://laravel.com/)
+[![PHP](https://img.shields.io/badge/PHP-8.1+-8892BE.svg)](https://www.php.net/downloads.php)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A clean, production-ready Laravel wrapper for the **Whish Payment Gateway API** designed for excellent developer experience, reliability, and scalability.
+
+---
+
+> **⚠️ UNOFFICIAL PACKAGE — NOT AFFILIATED WITH WHISH MONEY**
+>
+> This is an unofficial, community-created package for integrating [Whish Money](https://whish.money) payments.
+> It is **not** affiliated with, endorsed by, or maintained by Whish Money or any of its affiliates.
+>
+> Before going to production, verify all API endpoint details, authentication headers, and payload formats
+> against your official **Whish merchant documentation** or by contacting Whish Money support directly.
 
 ---
 
@@ -21,14 +35,14 @@ A clean, production-ready Laravel wrapper for the **Whish Payment Gateway API** 
 ✅ Idempotency-ready design  
 ✅ Retry-capable HTTP layer  
 ✅ Webhook generator  
-✅ Strong exception handling  
+✅ Strong exception handling
 
 ---
 
 ## 📦 Requirements
 
 - PHP **8.1+**
-- Laravel **10 / 11  / 12**
+- Laravel **10+**
 - HTTPS-enabled server
 
 ---
@@ -53,10 +67,10 @@ src/
 
 This structure ensures:
 
-- High testability  
-- Clean dependency injection  
-- Future gateway expansion  
-- Minimal breaking changes  
+- High testability
+- Clean dependency injection
+- Future gateway expansion
+- Minimal breaking changes
 
 ---
 
@@ -86,6 +100,7 @@ return redirect($response->collectUrl);
 ```
 
 ---
+
 ## Typed Responses
 
 ```php
@@ -116,9 +131,11 @@ if ($statusResponse->status === 'success') {
     // Optionally access payer phone: $statusResponse->payerPhone
 }
 ```
+
 ---
 
 🎯 Or if you prefer type safety with the Currency enum:
+
 ```php
 use AhmadChebbo\WhishPay\Enums\Currency;
 
@@ -142,6 +159,7 @@ $balance = WhishPay::getBalance();
 
 echo "Current balance: $balance USD";
 ```
+
 ---
 
 ## 💳 Recommended Payment Flow
@@ -176,7 +194,7 @@ Perfect for:
 
 ✅ Local development  
 ✅ CI pipelines  
-✅ Staging environments  
+✅ Staging environments
 
 ---
 
@@ -200,9 +218,9 @@ php artisan whish:test
 
 Checks:
 
-- API connectivity  
-- Headers  
-- Credentials  
+- API connectivity
+- Headers
+- Credentials
 
 ---
 
@@ -214,10 +232,10 @@ php artisan whish:health
 
 Runs deep checks:
 
-- Config validation  
-- API reachability  
-- Credential verification  
-- Timeout detection  
+- Config validation
+- API reachability
+- Credential verification
+- Timeout detection
 
 Perfect for production debugging.
 
@@ -246,7 +264,7 @@ php artisan whish:fake on
 php artisan whish:fake off
 ```
 
-*(Update your `.env` accordingly.)*
+_(Update your `.env` accordingly.)_
 
 ---
 
@@ -276,17 +294,16 @@ Before hitting the API, every payment flows through a customizable pipeline.
 
 Current stages include:
 
-
 ## ✅ Fraud Detection
 
 Detect suspicious transactions before submission.
 
 Examples you can implement:
 
-- Velocity checks  
-- Geo anomalies  
-- Repeated failures  
-- High-risk patterns  
+- Velocity checks
+- Geo anomalies
+- Repeated failures
+- High-risk patterns
 
 ```php
 FraudDetectionPipeline::class
@@ -312,9 +329,9 @@ Protect your business from extreme charges.
 
 Example rules:
 
-- Minimum payment threshold  
-- Maximum transaction cap  
-- Tier-based limits  
+- Minimum payment threshold
+- Maximum transaction cap
+- Tier-based limits
 
 ```php
 AmountLimitPipeline::class
@@ -326,9 +343,9 @@ AmountLimitPipeline::class
 
 Every payment attempt can be logged for:
 
-- Audit trails  
-- Financial reconciliation  
-- Incident debugging  
+- Audit trails
+- Financial reconciliation
+- Incident debugging
 
 ```php
 PaymentLoggingPipeline::class
@@ -342,6 +359,7 @@ All pipelines are managed in the `whish-pay` config file.
 You can comment, uncomment, reorder, or add your own custom pipelines easily.
 
 **Example (`config/whish-pay.php`):**
+
 ```php
 return [
     // ...
@@ -376,7 +394,7 @@ return [
     'fake' => env('WHISH_FAKE', false),
 
     // Model used by status checker
-    'pending_model' => App\Models\Payment::class,
+    'payment_model' => App\Models\Payment::class,
 
     'limits' => [
         'min' => 1,      // Minimum allowed amount per payment
@@ -389,6 +407,8 @@ return [
 ];
 ```
 
+> Verify these production and sandbox URLs against your official Whish merchant documentation before going live, as endpoints may change without notice.
+
 ---
 
 # ⚙️ Status Checker Model
@@ -396,7 +416,7 @@ return [
 Define your pending payment model:
 
 ```php
-'pending_model' => App\Models\Payment::class,
+'payment_model' => App\Models\Payment::class,
 ```
 
 Recommended columns:
@@ -462,12 +482,12 @@ Any other OTP results in failure.
 
 This package is intentionally structured to support future upgrades like:
 
-- Multi-gateway abstraction  
-- Circuit breakers  
-- Smart retries  
-- Gateway failover  
-- Event-driven payments  
-- Webhook signatures  
+- Multi-gateway abstraction
+- Circuit breakers
+- Smart retries
+- Gateway failover
+- Event-driven payments
+- Webhook signatures
 
 Adopt it once — scale without rewriting.
 
@@ -477,12 +497,12 @@ Adopt it once — scale without rewriting.
 
 Contributions are welcome!
 
-1. Fork the repository  
-2. Create a feature branch  
-3. Submit a Pull Request  
+1. Fork the repository
+2. Create a feature branch
+3. Submit a Pull Request
 
 ---
 
 ## 📄 License
 
-MIT License © Ahmad Shebb
+MIT License © Ahmad Chebbo

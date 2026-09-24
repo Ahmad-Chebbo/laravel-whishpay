@@ -2,10 +2,10 @@
 
 namespace AhmadChebbo\WhishPay\Http\Clients;
 
-use Illuminate\Support\Facades\Http;
 use AhmadChebbo\WhishPay\Contracts\HttpClientContract;
 use AhmadChebbo\WhishPay\Exceptions\WhishException;
 use AhmadChebbo\WhishPay\Support\IdempotencyKey;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class WhishHttpClient implements HttpClientContract
@@ -18,7 +18,7 @@ class WhishHttpClient implements HttpClientContract
         // If the mode is 'production' try to override the base URL
         if ($mode === 'production' && config('whish-pay.production_url')) {
             $baseUrl = config('whish-pay.production_url');
-        } 
+        }
 
         return Http::baseUrl($baseUrl)
             ->retry(3, 200)
@@ -47,13 +47,13 @@ class WhishHttpClient implements HttpClientContract
 
     protected function handle($response): array
     {
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             throw new WhishException('API request failed.');
         }
 
         $json = $response->json();
 
-        if (!($json['status'] ?? false)) {
+        if (! ($json['status'] ?? false)) {
 
             Log::error('Whish API response error', [
                 'response' => $response->body(),

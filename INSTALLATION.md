@@ -3,7 +3,7 @@
 Install via Composer:
 
 ```bash
-composer require ahmad-chebbo/laravel-whish-pay
+composer require ahmad-chebbo/laravel-whishpay
 ```
 
 ---
@@ -27,7 +27,7 @@ php artisan vendor:publish --tag=whish-config
 Add the following to your `.env`:
 
 ```env
-WHISH_SANDBOX_URL=https://api.sandbox.whish.money/itel-service/api
+WHISH_SANDBOX_URL=https://lb.sandbox.whish.money/itel-service/api
 WHISH_MODE=sandbox
 WHISH_CHANNEL=your_channel
 WHISH_SECRET=your_secret
@@ -40,7 +40,7 @@ WHISH_FAKE=true
 ### ✅ Production URL
 
 ```env
-WHISH_PRODUCTION_URL=https://api.whish.money/itel-service/api
+WHISH_PRODUCTION_URL=https://whish.money/itel-service/api
 ```
 
 ---

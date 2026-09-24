@@ -9,7 +9,7 @@ class FakeWhishHttpClient implements HttpClientContract
     public function get(string $uri): array
     {
         return [
-             'balance' => 1000000
+            'balance' => 1000000,
         ];
     }
 
@@ -18,12 +18,12 @@ class FakeWhishHttpClient implements HttpClientContract
         return match ($uri) {
 
             '/payment/whish' => [
-                'collectUrl' => 'https://fake.whish/checkout'
+                'collectUrl' => 'https://fake.whish/checkout',
             ],
 
             '/payment/collect/status' => [
                 'collectStatus' => 'success',
-                'payerPhoneNumber' => '96100000000'
+                'payerPhoneNumber' => '96100000000',
             ],
 
             default => []

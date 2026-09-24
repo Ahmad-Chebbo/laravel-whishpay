@@ -2,9 +2,9 @@
 
 namespace AhmadChebbo\WhishPay\Pipelines;
 
-use Closure;
 use AhmadChebbo\WhishPay\DTOs\PaymentDTO;
 use AhmadChebbo\WhishPay\Exceptions\WhishException;
+use Closure;
 
 class AmountLimitPipeline
 {
